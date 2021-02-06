@@ -7,8 +7,8 @@ from thndr.exceptions.amount_field_required import \
     AmountFieldRequiredAPIException
 from thndr.exceptions.user_id_field_required import \
     UserIDFieldRequiredAPIException
-from thndr.models import Account
-from thndr.serializers.account_serializer import AccountBalanceSerializer
+from thndr.models import Wallet
+from thndr.serializers.wa import AccountBalanceSerializer
 
 
 @api_view(["PUT"])
@@ -27,15 +27,15 @@ def deposit(request):
     except ValueError:
         raise AmountFieldIsIntAPIException
 
-    account = get_object_or_404(Account, user__pk=user_id)
+    wallet = get_object_or_404(Wallet, user__pk=user_id)
 
-    request.data['pk'] = account.pk
+    request.data['pk'] = wallet.pk
 
-    account__balance = account.balance
+    wallet__balance = wallet.balance
 
-    request.data["balance"] = account__balance + amount
+    request.data["balance"] = wallet__balance + amount
 
-    serializer = AccountBalanceSerializer(account, data=request.data)
+    serializer = AccountBalanceSerializer(wallet, data=request.data)
     serializer.is_valid(raise_exception=True)
     serializer.save()
 

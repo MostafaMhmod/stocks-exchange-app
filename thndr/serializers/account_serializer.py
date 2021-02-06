@@ -3,7 +3,7 @@ from rest_framework import serializers
 from thndr.models import Account
 
 
-class AccountBalanceSerializer(serializers.ModelSerializer):
+class AccountRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
-        fields = ("balance",)
+        fields = ("pk", 'user', 'stock', 'quantity')

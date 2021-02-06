@@ -4,9 +4,11 @@ from django.db import models
 
 class Account(models.Model):
     user = models.OneToOneField(
-        User, verbose_name=("user"), on_delete=models.CASCADE, unique=True
+        User, verbose_name=("user"), on_delete=models.CASCADE
     )
-    balance = models.PositiveIntegerField('balance', default=0)
+    stock = models.OneToOneField('thndr.Stock', verbose_name=("stock"), on_delete=models.CASCADE)
+
+    quantity = models.PositiveIntegerField('quantity', default=0)
 
     def __str__(self):
         return self.user.username
@@ -16,5 +18,6 @@ class Account(models.Model):
         return self.user.get_full_name()
 
     class Meta:
+        unique_together = ('user', 'stock',)
         verbose_name = "Account"
         verbose_name_plural = "Accounts"
