@@ -1,0 +1,6 @@
+# Example configuration for Black.
+
+[tool.black]
+line-length = 79
+include = '\.pyi?$'
+exclude = '.pipenv'
