@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-class Account(models.Model):
+class Holding(models.Model):
     user = models.OneToOneField(
         User, verbose_name=("user"), on_delete=models.CASCADE
     )
@@ -19,5 +19,5 @@ class Account(models.Model):
 
     class Meta:
         unique_together = ('user', 'stock',)
-        verbose_name = "Account"
-        verbose_name_plural = "Accounts"
+        verbose_name = "Holding"
+        verbose_name_plural = "Holdings"

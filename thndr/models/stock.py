@@ -10,7 +10,8 @@ class Stock(models.Model):
     )
     name = models.CharField(("name"), max_length=128)
 
-    price = models.DecimalField(default=0, max_digits=5, decimal_places=3)
+    # Money Fields SHOULD be a DecimalField but for simplicity we used PositiveIntegerField here
+    price = models.PositiveIntegerField('price', default=0)
 
     quantity = models.IntegerField()
     created_at = models.DateTimeField(("created_at"), auto_now_add=True)
@@ -24,6 +25,7 @@ class Stock(models.Model):
 
         if not create_operation:
             self.modified_at = datetime.now()
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "Stock"

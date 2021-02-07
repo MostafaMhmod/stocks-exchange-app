@@ -1,9 +1,9 @@
 from django.contrib import admin
 
-from thndr.models import Account, Stock, Wallet
+from thndr.models import Holding, Stock, Wallet
 
 
-class AccountAdmin(admin.ModelAdmin):
+class HoldingAdmin(admin.ModelAdmin):
     search_fields = ("id",)
     list_display = ("id", 'user', "quantity",)
 
@@ -19,6 +19,6 @@ class WalletAdmin(admin.ModelAdmin):
     list_display = ("id", 'user', "balance",)
 
 
-admin.site.register(Account, AccountAdmin)
+admin.site.register(Holding, HoldingAdmin)
 admin.site.register(Stock, StockAdmin)
 admin.site.register(Wallet, WalletAdmin)

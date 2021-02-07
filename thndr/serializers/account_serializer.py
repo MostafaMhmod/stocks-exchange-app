@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
-from thndr.models import Account
+from thndr.models import Holding
 
 
-class AccountRetrieveSerializer(serializers.ModelSerializer):
+class HoldingRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Account
+        model = Holding
         fields = ("pk", 'user', 'stock', 'quantity')

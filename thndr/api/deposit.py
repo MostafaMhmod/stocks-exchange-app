@@ -8,7 +8,7 @@ from thndr.exceptions.amount_field_required import \
 from thndr.exceptions.user_id_field_required import \
     UserIDFieldRequiredAPIException
 from thndr.models import Wallet
-from thndr.serializers.wa import AccountBalanceSerializer
+from thndr.serializers.wallet_serializers import WalletWriteSerializer
 
 
 @api_view(["PUT"])
@@ -29,13 +29,11 @@ def deposit(request):
 
     wallet = get_object_or_404(Wallet, user__pk=user_id)
 
-    request.data['pk'] = wallet.pk
-
     wallet__balance = wallet.balance
 
     request.data["balance"] = wallet__balance + amount
 
-    serializer = AccountBalanceSerializer(wallet, data=request.data)
+    serializer = WalletWriteSerializer(wallet, data=request.data)
     serializer.is_valid(raise_exception=True)
     serializer.save()
 
