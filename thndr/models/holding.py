@@ -3,7 +3,7 @@ from django.db import models
 
 
 class Holding(models.Model):
-    user = models.OneToOneField(
+    user = models.ForeignKey(
         User, verbose_name=("user"), on_delete=models.CASCADE
     )
     stock = models.ForeignKey('thndr.Stock', verbose_name=("stock"), on_delete=models.CASCADE)
