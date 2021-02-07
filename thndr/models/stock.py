@@ -6,7 +6,7 @@ from datetime import datetime
 
 class Stock(models.Model):
     stock_uuid = models.UUIDField(
-        default=uuid.uuid4, editable=False, unique=True, null=True
+        default=uuid.uuid4, editable=False, unique=True, null=True, primary_key=True
     )
     name = models.CharField(("name"), max_length=128)
 

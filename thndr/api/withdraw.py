@@ -13,14 +13,13 @@ from thndr.serializers.wallet_serializers import WalletWriteSerializer
 
 @api_view(["PUT"])
 def withdraw(request):
+    if 'user_id' not in request.data:
+        raise UserIDFieldRequiredAPIException
+    if 'amount' not in request.data:
+        raise AmountFieldRequiredAPIException
+
     user_id = request.data["user_id"]
     amount = request.data["amount"]
-
-    if not user_id:
-        raise UserIDFieldRequiredAPIException
-
-    if not amount:
-        raise AmountFieldRequiredAPIException
 
     try:
         amount = int(amount)

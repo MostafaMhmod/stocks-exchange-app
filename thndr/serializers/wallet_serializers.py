@@ -5,6 +5,8 @@ from thndr.models import Wallet
 
 
 class WalletWriteSerializer(serializers.ModelSerializer):
+    balance = serializers.IntegerField(min_value=1, required=True)
+
     def validate(self, attrs):
         if attrs['balance'] < 0:
             raise NegativeBalanceAPIException
