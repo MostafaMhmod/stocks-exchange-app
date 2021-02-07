@@ -6,7 +6,7 @@ class Holding(models.Model):
     user = models.OneToOneField(
         User, verbose_name=("user"), on_delete=models.CASCADE
     )
-    stock = models.OneToOneField('thndr.Stock', verbose_name=("stock"), on_delete=models.CASCADE)
+    stock = models.ForeignKey('thndr.Stock', verbose_name=("stock"), on_delete=models.CASCADE)
 
     quantity = models.PositiveIntegerField('quantity', default=0)
 
@@ -18,6 +18,8 @@ class Holding(models.Model):
         return self.user.get_full_name()
 
     class Meta:
-        unique_together = ('user', 'stock',)
         verbose_name = "Holding"
         verbose_name_plural = "Holdings"
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'stock'], name='unique holding')
+        ]

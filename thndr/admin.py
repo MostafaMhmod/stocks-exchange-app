@@ -5,7 +5,7 @@ from thndr.models import Holding, Stock, Wallet
 
 class HoldingAdmin(admin.ModelAdmin):
     search_fields = ("id",)
-    list_display = ("id", 'user', "quantity",)
+    list_display = ("id", 'user', 'stock', "quantity",)
 
 
 class StockAdmin(admin.ModelAdmin):
