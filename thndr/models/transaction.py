@@ -5,18 +5,16 @@ from django.contrib.auth.models import User
 class Transaction(models.Model):
     created_at = models.DateTimeField(("created_at"), auto_now_add=True)
 
-    user = models.OneToOneField(User, verbose_name=("user"), on_delete=models.CASCADE)
+    user = models.ForeignKey(User, verbose_name=("user"), on_delete=models.CASCADE)
 
-    stock = models.OneToOneField('thndr.Stock', verbose_name=("stock"), null=True,
-                                 blank=True, on_delete=models.CASCADE)
+    stock = models.ForeignKey('thndr.Stock', verbose_name=("stock"), null=True,
+                              blank=True, on_delete=models.CASCADE)
 
-    amount = models.IntegerField("amount", editable=False)
+    amount = models.IntegerField("amount", null=True, blank=True)
+    stocks_total = models.IntegerField("total stocks", null=True, blank=True)
 
-    is_wallet = models.BooleanField("wallet_transaction", null=False, blank=False)
-    is_stock = models.BooleanField("stock_transaction", null=False, blank=False)
-
-    def __str__(self):
-        return self.amount
+    deposit = models.BooleanField("deposit", null=False, blank=False)
+    withdraw = models.BooleanField("withdraw", null=False, blank=False)
 
     class Meta:
         verbose_name = "Transaction"

@@ -1,24 +1,19 @@
 from django.contrib import admin
 
-from thndr.models import Holding, Stock, Wallet
-
-
-class HoldingAdmin(admin.ModelAdmin):
-    search_fields = ("id",)
-    list_display = ("id", 'user', 'stock', "quantity",)
+from thndr.models import Transaction, Stock
 
 
 class StockAdmin(admin.ModelAdmin):
-    search_fields = ("id", 'stock_uuid')
-    list_display = ("id", 'stock_uuid', 'name', "price", "quantity",
+    search_fields = ('stock_uuid',)
+    list_display = ('stock_uuid', 'name', "price", "quantity",
                     "created_at", "modified_at",)
 
 
-class WalletAdmin(admin.ModelAdmin):
+class TransactionAdmin(admin.ModelAdmin):
     search_fields = ("id",)
-    list_display = ("id", 'user', "balance",)
+    list_display = ('created_at', 'user', 'stock', 'amount',
+                    'stocks_total', 'withdraw', 'deposit')
 
 
-admin.site.register(Holding, HoldingAdmin)
 admin.site.register(Stock, StockAdmin)
-admin.site.register(Wallet, WalletAdmin)
+admin.site.register(Transaction, TransactionAdmin)

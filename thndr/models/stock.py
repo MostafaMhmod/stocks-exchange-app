@@ -6,7 +6,7 @@ from datetime import datetime
 
 class Stock(models.Model):
     stock_uuid = models.UUIDField(
-        default=uuid.uuid4, editable=False, unique=True, null=True, primary_key=True
+        default=uuid.uuid4, editable=False, unique=True, primary_key=True
     )
     name = models.CharField(("name"), max_length=128)
 
@@ -18,7 +18,7 @@ class Stock(models.Model):
     modified_at = models.DateTimeField(('modified'), auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return self.name if self.name else ""
 
     def save(self, *args, **kwargs):
         create_operation = not self.pk
