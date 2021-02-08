@@ -20,13 +20,6 @@ class Stock(models.Model):
     def __str__(self):
         return self.name if self.name else ""
 
-    def save(self, *args, **kwargs):
-        create_operation = not self.pk
-
-        if not create_operation:
-            self.modified_at = datetime.now()
-        super().save(*args, **kwargs)
-
     class Meta:
         verbose_name = "Stock"
         verbose_name_plural = "Stocks"

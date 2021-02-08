@@ -6,7 +6,7 @@ from thndr.serializers.stock_serializer import StockRetrieveSerializer
 from thndr.models import Stock
 
 
-@api_view(["GET"])
+@api_view(["POST"])
 def stock(request):
     stock_uuid = request.data.get('stock_id')
     try:
