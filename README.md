@@ -9,8 +9,8 @@ To Run the App:
 
 ## Implementations Notes:
 - Ideally, creating a backend service with the need of a low latency Should Not be implemented by the Django library
-  since the only compatible library with support to low latency connection (MQTT, webscockts etc.) which is the django channel librarry 
-  which lack the documentation and the resources for the MQTT support,a better solution would be to use either the fastapi framework
+  since the only compatible library with support to low latency connection (MQTT, webscockts etc.) which is the django channel librarry.
+  lacks the documentation and the resources for the MQTT support,a better solution would be to use either the fastapi framework
   along with the fastapi-mqtt tool for the MQTT integration support.
 
 - In here for the sake of simplicity I'm using the Django's managment commands to subscripe to the MQTT events 
