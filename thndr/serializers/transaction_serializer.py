@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers
-from rest_framework.exceptions import NotAcceptable
+from rest_framework.exceptions import ParseError
 from thndr.exceptions.negative_balance import NegativeBalanceAPIException
 from thndr.exceptions.price_out_of_bounds import PriceOutOfBoundsAPIException
 from thndr.models import Transaction
@@ -37,8 +37,8 @@ class TransactionWalletCreateSerializer(serializers.ModelSerializer):
 
 class TransactionStockCreateSerializer(serializers.ModelSerializer):
     user = serializers.IntegerField(required=True)
-    stock = serializers.CharField(required=False)
-    amount = serializers.IntegerField(min_value=1, required=False)
+    stock = serializers.UUIDField(required=True)
+    amount = serializers.IntegerField(required=False)
     withdraw = serializers.BooleanField(required=True)
     deposit = serializers.BooleanField(required=True)
 
@@ -46,7 +46,7 @@ class TransactionStockCreateSerializer(serializers.ModelSerializer):
         upper_bound = self.context.get('upper_bound')
         lower_bound = self.context.get('lower_bound')
         if not (type(upper_bound) == int or type(lower_bound) == int):
-            raise NotAcceptable
+            raise ParseError
         return super().validate(attrs)
 
     def create(self, validated_data):
